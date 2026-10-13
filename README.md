@@ -21,9 +21,14 @@ Checks the URL, rejects duplicates, sets `date_added` to today, fetches the logo
 Or edit `tools.json` by hand, then `python3 scripts/fetch_logos.py && python3 scripts/build.py`.
 Pricing: `free` | `freemium` | `paid`. Tools added within 7 days of the newest entry get a "New" badge.
 
+## Affiliate links
+Paste approved links with `python3 scripts/set_affiliate.py <slug> <url>` (or edit `affiliates.json`, then build).
+A tool can also carry `"affiliate_url"` in `tools.json`. When set, Visit buttons use it with `rel="sponsored noopener"`;
+otherwise the official URL is used. The disclosure (footer + `/disclosure.html`) is always on. See `AFFILIATES.md`.
+
 ## Files
 - `tools.json` — source of truth · `style.css`, `app.js` — hand-written
-- `scripts/build.py` — generates `index.html`, `category/`, `tool/`, `advertise.html`, `404.html`, `offline.html`, `sitemap.xml`, `feed.xml`, `robots.txt`, `manifest.webmanifest`, `sw.js` (don't edit those by hand)
+- `scripts/build.py` — generates `index.html`, `category/`, `tool/`, `alternatives/`, `best/`, `advertise.html`, `disclosure.html`, `404.html`, `offline.html`, `sitemap.xml`, `feed.xml`, `robots.txt`, `manifest.webmanifest`, `sw.js` (don't edit those by hand)
 - `scripts/fetch_logos.py` — downloads favicons once into `assets/logos/` (monogram fallback; `--force` to refresh)
 - `.github/ISSUE_TEMPLATE/` — tool submissions and sponsor inquiries (the site's forms open pre-filled issues)
 

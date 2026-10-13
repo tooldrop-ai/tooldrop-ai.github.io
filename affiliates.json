@@ -1,0 +1,20 @@
+{
+  "_readme": "Paste your approved affiliate link next to a tool slug (must start with https://), then run: python3 scripts/build.py. Empty values are ignored and the official URL is used. Slugs = tool/<slug>.html.",
+  "elevenlabs": "",
+  "krisp": "",
+  "gamma": "",
+  "synthesia": "",
+  "looka": "",
+  "fireflies-ai": "",
+  "jasper": "",
+  "motion": "",
+  "opusclip": "",
+  "descript": "",
+  "quillbot": "",
+  "grammarly": "",
+  "lovable": "",
+  "perplexity": "",
+  "wordtune": "",
+  "murf-ai": "",
+  "writesonic": ""
+}

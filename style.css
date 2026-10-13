@@ -98,3 +98,9 @@ dialog[open] .pal{animation:palin .25s var(--ease)}@keyframes palin{from{opacity
 .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding-right:16px;-webkit-mask:linear-gradient(90deg,#000 85%,transparent)}.chips::-webkit-scrollbar{display:none}.chip{flex-shrink:0}.grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
 input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}.tbl{width:100%;border-collapse:collapse;font-size:.93rem}
+.tbl th,.tbl td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}.tbl tr:last-child>*{border-bottom:0}.tbl thead th{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);font-weight:600}
+.tbl tbody th a{text-decoration:none;font-weight:650}.tbl tbody th a:hover{color:var(--g2)}.tbl td:nth-child(3){color:var(--mut)}.tbl .visit{margin:0;white-space:nowrap}
+.prose h2{margin:22px 0 8px;font-size:1.15rem}.prose h2:first-child{margin-top:0}.prose ul{color:var(--mut);padding-left:20px}.prose p{color:var(--mut)}.prose code{font-size:.88em;padding:1px 6px;border-radius:6px;background:var(--line)}
+.disc{max-width:760px}.disc a,.prose a{color:var(--txt)}
+@media(max-width:640px){.tbl thead{display:none}.tbl tr{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:14px;border-bottom:1px solid var(--line)}.tbl tr:last-child{border:0}.tbl th,.tbl td{padding:0;border:0}.tbl td:nth-child(3){grid-column:1/-1;grid-row:2}.tbl td:nth-child(2){grid-row:1;grid-column:2}.tbl td:nth-child(4){grid-column:1/-1}.tbl .visit{padding-left:0}}

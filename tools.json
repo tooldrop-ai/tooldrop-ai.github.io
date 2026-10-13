@@ -542,5 +542,21 @@
     "category": "Developer Platforms",
     "pricing": "freemium",
     "date_added": "2026-10-13"
+  },
+  {
+    "name": "Murf AI",
+    "url": "https://murf.ai/",
+    "description": "AI voice generator with lifelike text-to-speech voices.",
+    "category": "Audio",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Writesonic",
+    "url": "https://writesonic.com/",
+    "description": "AI writing and SEO content platform.",
+    "category": "Writing",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
   }
 ]

@@ -10,8 +10,12 @@ NEW_DAYS = 7
 e = html.escape
 slug = lambda s: re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 tools = sorted(json.loads((ROOT/"tools.json").read_text()), key=lambda t: t["name"].lower())
+_aff_file = ROOT/"affiliates.json"
+AFF = {k: v.strip() for k, v in (json.loads(_aff_file.read_text()) if _aff_file.exists() else {}).items() if not k.startswith("_") and isinstance(v, str) and v.strip().startswith("https://")}
 for t in tools:
     t["slug"] = slug(t["name"])
+    t["out"] = AFF.get(t["slug"]) or (t.get("affiliate_url") or "").strip() or t["url"]
+    t["aff"] = t["out"] != t["url"]
     t["logo"] = (ROOT/f"assets/logos/{t['slug']}.png").exists()
     t["hue"] = int(hashlib.md5(t["name"].encode()).hexdigest()[:4], 16) % 360
 cats = sorted({t["category"] for t in tools})
@@ -34,6 +38,9 @@ ICON = {
  "up": '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 }
 
+def rel(t):
+    return "sponsored noopener" if t["aff"] else "noopener"
+
 def logo(t, size=44):
     if t["logo"]:
         return f'<span class="logo-tile" style="--s:{size}px"><img src="{BASE}assets/logos/{t["slug"]}.png" alt="" width="{size-16}" height="{size-16}" loading="lazy" decoding="async"></span>'
@@ -46,7 +53,7 @@ def card(t):
             f'<button type="button" class="fav" data-fav="{t["slug"]}" aria-pressed="false" aria-label="Save {e(t["name"])} to My stack">{ICON["star"]}</button></div>'
             f'<p>{e(t["description"])}</p><div class="meta"><span class="pill {t["pricing"]}">{t["pricing"].capitalize()}</span>'
             f'{"<span class=pill-new>New</span>" if t["new"] else ""}'
-            f'<a class="visit" href="{e(t["url"])}" target="_blank" rel="noopener" aria-label="Visit {e(t["name"])} official site (opens in new tab)">Visit {ICON["ext"]}</a></div></article>')
+            f'<a class="visit" href="{e(t["out"])}" target="_blank" rel="{rel(t)}" aria-label="Visit {e(t["name"])} official site (opens in new tab){", affiliate link" if t["aff"] else ""}">Visit {ICON["ext"]}</a></div></article>')
 
 def layout(title, desc, path, body, lds=(), og_type="website", noindex=False):
     url = SITE + path
@@ -73,7 +80,8 @@ def layout(title, desc, path, body, lds=(), og_type="website", noindex=False):
 <main id="main">{body}</main>
 <footer class="foot"><div class="wrap"><div class="foot-grid"><div><a class="brand" href="{BASE}">{LOGO}<span>Tool<b>Drop</b></span></a><p class="muted">A curated, independent directory of AI tools. Listings link to each tool's official site. Sponsored placements are always labeled.</p></div>
 <nav aria-label="Categories"><h2 class="fh">Categories</h2><ul>{foot_cats}</ul></nav>
-<nav aria-label="Site"><h2 class="fh">ToolDrop</h2><ul><li><a href="{BASE}#tools">All tools</a></li><li><a href="{BASE}?view=stack#tools">My stack</a></li><li><a href="{SUBMIT}" rel="noopener">Submit a tool</a></li><li><a href="{BASE}advertise.html">Advertise</a></li><li><a href="{SITE}feed.xml">RSS feed</a></li><li><a href="{REPO}" rel="noopener">GitHub</a></li></ul></nav></div>
+<nav aria-label="Site"><h2 class="fh">ToolDrop</h2><ul><li><a href="{BASE}#tools">All tools</a></li><li><a href="{BASE}best/free-ai-tools.html">Free AI tools</a></li><li><a href="{BASE}?view=stack#tools">My stack</a></li><li><a href="{SUBMIT}" rel="noopener">Submit a tool</a></li><li><a href="{BASE}advertise.html">Advertise</a></li><li><a href="{SITE}feed.xml">RSS feed</a></li><li><a href="{BASE}disclosure.html">Disclosure</a></li><li><a href="{REPO}" rel="noopener">GitHub</a></li></ul></nav></div>
+<p class="muted small disc">Some links on ToolDrop may be affiliate links: if you buy through them, ToolDrop may earn a commission at no extra cost to you. It never affects which tools are listed or how they're described. <a href="{BASE}disclosure.html">Disclosure</a></p>
 <p class="muted small">© {datetime.date.today().year} ToolDrop · Updated {fmt_date(latest)}</p></div></footer>
 <button type="button" class="icon-btn totop" id="totop" aria-label="Back to top">{ICON["up"]}</button>
 <dialog id="palette" aria-label="Search tools"><div class="pal"><div class="pal-in">{ICON["search"]}<input id="pal-q" type="search" placeholder="Search tools, categories…" autocomplete="off" aria-label="Search tools" aria-controls="pal-list"><kbd>Esc</kbd></div><ul id="pal-list" role="listbox"></ul><p class="pal-hint muted small">↑ ↓ to navigate · Enter to open</p></div></dialog>
@@ -122,7 +130,7 @@ for c in cats:
     others = "".join(f'<a class="chip" href="{BASE}category/{slug(o)}.html">{e(o)}</a>' for o in cats if o != c)
     body = f'''<section class="hero sm wrap">{crumb_html(("Home", BASE), (c, None))}<h1 class="reveal">Best AI tools for <span class="grad">{e(c)}</span></h1>
 <p class="lede reveal">{len(ts)} {e(c)} tools — {sum(t["pricing"]=="free" for t in ts)} free, {sum(t["pricing"]=="freemium" for t in ts)} freemium, {sum(t["pricing"]=="paid" for t in ts)} paid.</p></section>
-<div class="wrap">{sponsor}<div class="grid block">{"".join(card(t) for t in ts)}</div><section class="block"><h2>Other categories</h2><div class="chips">{others}</div></section></div>'''
+<div class="wrap">{sponsor}<div class="grid block">{"".join(card(t) for t in ts)}</div>{f'<p class="block"><a class="btn ghost sm" href="{BASE}best/free-{slug(c)}-ai-tools.html">Only free {e(c)} tools →</a></p>' if sum(1 for x in ts if x["pricing"] != "paid") >= 3 else ''}<section class="block"><h2>Other categories</h2><div class="chips">{others}</div></section></div>'''
     pages[f"category/{slug(c)}.html"] = layout(f"Best {c} AI Tools ({len(ts)}) — ToolDrop", f"{len(ts)} {c} AI tools compared by pricing: " + ", ".join(t["name"] for t in ts[:6]) + ".", f"category/{slug(c)}.html", body, [crumbs(("Home", SITE), (c, cu)), itemlist(ts, f"{c} AI tools")])
 
 # ---- tool pages
@@ -137,10 +145,10 @@ for t in tools:
     body = f'''<section class="hero sm wrap">{crumb_html(("Home", BASE), (t["category"], f"{BASE}category/{slug(t['category'])}.html"), (t["name"], None))}
 <div class="tool-head reveal">{logo(t, 72)}<div><h1>{e(t["name"])}</h1><p class="lede">{e(t["description"])}</p>
 <div class="meta"><a class="pill cat" href="{BASE}category/{slug(t['category'])}.html">{e(t["category"])}</a><span class="pill {t["pricing"]}">{t["pricing"].capitalize()}</span>{"<span class=pill-new>New</span>" if t["new"] else ""}</div></div></div>
-<div class="hero-cta reveal"><a class="btn" href="{e(t["url"])}" target="_blank" rel="noopener">Visit {e(t["name"])} {ICON["ext"]}</a><button type="button" class="btn ghost fav fav-lg" data-fav="{t["slug"]}" aria-pressed="false">{ICON["star"]} <span class="fl">Save to My stack</span></button></div></section>
-<div class="wrap"><section class="panel reveal block"><h2>At a glance</h2><dl class="facts"><div><dt>Category</dt><dd><a href="{BASE}category/{slug(t['category'])}.html">{e(t["category"])}</a></dd></div><div><dt>Pricing</dt><dd>{t["pricing"].capitalize()} — {pricing_note}</dd></div><div><dt>Official site</dt><dd><a href="{e(t["url"])}" target="_blank" rel="noopener">{e(re.sub(r"^https?://(www\.)?", "", t["url"]).rstrip("/"))}</a></dd></div><div><dt>Listed on ToolDrop</dt><dd><time datetime="{t["date_added"]}">{fmt_date(t["date_added"])}</time></dd></div></dl>
-<p class="muted small">Pricing labels are a quick guide; check the official site for current plans.</p></section>
-{sponsor}{f'<section class="block"><h2>Alternatives to {e(t["name"])}</h2><div class="grid">{"".join(card(a) for a in alts)}</div></section>' if alts else ''}</div>'''
+<div class="hero-cta reveal"><a class="btn" href="{e(t["out"])}" target="_blank" rel="{rel(t)}">Visit {e(t["name"])} {ICON["ext"]}</a><button type="button" class="btn ghost fav fav-lg" data-fav="{t["slug"]}" aria-pressed="false">{ICON["star"]} <span class="fl">Save to My stack</span></button></div></section>
+<div class="wrap"><section class="panel reveal block"><h2>At a glance</h2><dl class="facts"><div><dt>Category</dt><dd><a href="{BASE}category/{slug(t['category'])}.html">{e(t["category"])}</a></dd></div><div><dt>Pricing</dt><dd>{t["pricing"].capitalize()} — {pricing_note}</dd></div><div><dt>Official site</dt><dd><a href="{e(t["out"])}" target="_blank" rel="{rel(t)}">{e(re.sub(r"^https?://(www\.)?", "", t["url"]).rstrip("/"))}</a></dd></div><div><dt>Listed on ToolDrop</dt><dd><time datetime="{t["date_added"]}">{fmt_date(t["date_added"])}</time></dd></div></dl>
+<p class="muted small">Pricing labels are a quick guide; check the official site for current plans.{' The Visit link is an affiliate link: ToolDrop may earn a commission at no extra cost to you. <a href="/disclosure.html">Disclosure</a>.' if t["aff"] else ''}</p></section>
+{sponsor}{f'<section class="block"><h2>Alternatives to {e(t["name"])}</h2><div class="grid">{"".join(card(a) for a in alts)}</div>{f'<p><a class="btn ghost sm" href="{BASE}alternatives/{t["slug"]}.html">Compare all {sum(1 for x in tools if x["category"] == t["category"]) - 1} alternatives →</a></p>' if sum(1 for x in tools if x["category"] == t["category"]) - 1 >= 3 else ''}</section>' if alts else ''}</div>'''
     pages[f"tool/{t['slug']}.html"] = layout(f"{t['name']} — {t['category']} AI Tool, Pricing & Alternatives | ToolDrop", f"{t['name']}: {t['description']} {t['pricing'].capitalize()}. See alternatives like " + ", ".join(a["name"] for a in alts[:3]) + ".", f"tool/{t['slug']}.html", body, [crumbs(("Home", SITE), (t["category"], cu), (t["name"], tu)), app])
 
 # ---- advertise / 404 / offline
@@ -156,12 +164,59 @@ pages["advertise.html"] = layout("Advertise on ToolDrop — Sponsor the Featured
 pages["404.html"] = layout("Page not found — ToolDrop", "This page doesn't exist.", "404.html", f'<section class="hero wrap"><p class="eyebrow">404</p><h1>This page <span class="grad">dropped off</span>.</h1><p class="lede">Try searching instead, or head back to all tools.</p><div class="hero-cta"><button type="button" class="btn" data-palette>{ICON["search"]} Search tools</button><a class="btn ghost" href="{BASE}">All tools</a></div></section>', noindex=True)
 pages["offline.html"] = layout("Offline — ToolDrop", "You're offline.", "offline.html", f'<section class="hero wrap"><h1>You’re <span class="grad">offline</span>.</h1><p class="lede">Pages you’ve visited are still available. Reconnect to browse everything.</p><div class="hero-cta"><a class="btn" href="{BASE}">Home</a></div></section>', noindex=True)
 
-for p in ROOT.glob("tool/*.html"): p.unlink()
+# ---- disclosure
+disc = f"""<section class="hero sm wrap"><p class="eyebrow reveal">Transparency</p><h1 class="reveal">Affiliate &amp; advertising <span class="grad">disclosure</span></h1><p class="lede reveal">Last updated <time datetime="{latest}">{fmt_date(latest)}</time>.</p></section>
+<div class="wrap prose"><section class="panel reveal block">
+<h2>Affiliate links</h2><p>Some "Visit" links on ToolDrop are affiliate links. If you click one and later buy a paid plan, ToolDrop may earn a commission from the tool's maker. You pay the same price — affiliate links never cost you extra.</p>
+<p>Affiliate links are marked in the page code with <code>rel="sponsored"</code>, and tool pages that use one say so next to the Visit button.</p>
+<h2>What affiliate links don't change</h2><ul><li>Which tools are listed: tools are added because they're useful and real, whether or not they have an affiliate program. Most listings have no affiliate link.</li><li>How tools are described, ordered or labeled. Lists are alphabetical or by date added; pricing labels are our best reading of each tool's official site.</li><li>Listings are free. Nobody can pay to be listed or to get a better description.</li></ul>
+<h2>Sponsored placements</h2><p>The "Featured · Sponsored" slot is paid advertising when it is filled, and it is always labeled as sponsored. It is clearly separate from the regular listings.</p>
+<h2>Privacy</h2><p>ToolDrop itself uses no analytics, ad trackers or cookies. Your theme choice and "My stack" favorites are stored only in your own browser (localStorage) and never sent anywhere. When you follow a link to another site, including an affiliate link, that site's own privacy and cookie policy applies; affiliate tracking happens on their side.</p>
+<h2>Questions or corrections</h2><p>Spotted something wrong or outdated? <a href="{REPO}/issues/new" rel="noopener">Open an issue on GitHub</a>.</p>
+</section></div>"""
+pages["disclosure.html"] = layout("Affiliate & Advertising Disclosure — ToolDrop", "How ToolDrop uses affiliate links and sponsored placements, and what they never change.", "disclosure.html", disc)
+
+# ---- alternatives pages (comparison tables, distinct search intent from tool pages)
+def table(ts):
+    rows = "".join(f'<tr><th scope="row"><a href="{BASE}tool/{t["slug"]}.html">{e(t["name"])}</a></th><td><span class="pill {t["pricing"]}">{t["pricing"].capitalize()}</span></td><td>{e(t["description"])}</td><td><a class="visit" href="{e(t["out"])}" target="_blank" rel="{rel(t)}">Visit {ICON["ext"]}</a></td></tr>' for t in ts)
+    return f'<div class="tbl-wrap reveal"><table class="tbl"><thead><tr><th scope="col">Tool</th><th scope="col">Pricing</th><th scope="col">What it does</th><th scope="col"><span class="sr">Link</span></th></tr></thead><tbody>{rows}</tbody></table></div>'
+ALT_MIN = 3
+alt_pages = []
+for t in tools:
+    alts = sorted([a for a in tools if a["category"] == t["category"] and a is not t], key=lambda a: (a["pricing"] != "free", a["name"].lower()))
+    if len(alts) < ALT_MIN: continue
+    alt_pages.append(t["slug"]); au = f"{SITE}alternatives/{t['slug']}.html"
+    freeish = [a["name"] for a in alts if a["pricing"] != "paid"]
+    body = f"""<section class="hero sm wrap">{crumb_html(("Home", BASE), (t["category"], f"{BASE}category/{slug(t['category'])}.html"), (f"{t['name']} alternatives", None))}
+<h1 class="reveal">{len(alts)} <span class="grad">{e(t["name"])}</span> alternatives</h1>
+<p class="lede reveal">Looking for an alternative to {e(t["name"])}? Here are the other {e(t["category"])} tools on ToolDrop{f", {len(freeish)} of them free or with a free tier" if freeish else ""}.</p></section>
+<div class="wrap"><section class="block">{table(alts)}</section>
+<section class="panel reveal block"><h2>About {e(t["name"])}</h2><p class="muted">{e(t["description"])} Pricing: {t["pricing"]}.</p><p><a class="btn ghost sm" href="{BASE}tool/{t["slug"]}.html">{e(t["name"])} details</a></p></section>{sponsor}</div>"""
+    pages[f"alternatives/{t['slug']}.html"] = layout(f"{len(alts)} Best {t['name']} Alternatives — {t['category']} AI Tools | ToolDrop", f"Alternatives to {t['name']}: " + ", ".join(a["name"] for a in alts[:5]) + f" and more. Compare {t['category']} AI tools by pricing.", f"alternatives/{t['slug']}.html", body, [crumbs(("Home", SITE), (t["category"], f"{SITE}category/{slug(t['category'])}.html"), (f"{t['name']} alternatives", au)), itemlist(alts, f"{t['name']} alternatives")])
+
+# ---- best free pages
+best_pages = []
+def best_page(path, h1, title, desc, ts, intro):
+    best_pages.append(path)
+    body = f"""<section class="hero sm wrap">{crumb_html(("Home", BASE), (h1, None))}<h1 class="reveal">{h1}</h1><p class="lede reveal">{intro}</p></section>
+<div class="wrap"><section class="block">{table(ts)}</section>{sponsor}</div>"""
+    pages[path] = layout(title, desc, path, body, [crumbs(("Home", SITE), (h1, SITE + path)), itemlist(ts, h1)])
+free_all = [t for t in tools if t["pricing"] != "paid"]
+best_page("best/free-ai-tools.html", "Free AI tools", f"{len(free_all)} Free AI Tools (Free & Free-Tier) — ToolDrop", f"{len(free_all)} AI tools you can use for free or start on a free tier, across {len(cats)} categories.", sorted(free_all, key=lambda t: (t["pricing"] != "free", t["category"], t["name"].lower())), f"{sum(t['pricing']=='free' for t in tools)} completely free tools and {sum(t['pricing']=='freemium' for t in tools)} with a free tier. Free tiers usually have usage limits — check each official site.")
+BEST_FREE = {}
+for c in cats:
+    ts = [t for t in tools if t["category"] == c and t["pricing"] != "paid"]
+    if len(ts) >= 3:
+        pth = f"best/free-{slug(c)}-ai-tools.html"; BEST_FREE[c] = pth
+        best_page(pth, f"Free {c} AI tools", f"{len(ts)} Free {c} AI Tools — ToolDrop", f"{len(ts)} free or free-tier {c} AI tools: " + ", ".join(t["name"] for t in ts[:5]) + ".", sorted(ts, key=lambda t: (t["pricing"] != "free", t["name"].lower())), f"{len(ts)} {e(c)} tools you can start using without paying.")
+
+import shutil
+for d in ("tool", "alternatives", "best"): shutil.rmtree(ROOT/d, ignore_errors=True)
 for p, s in pages.items():
     f = ROOT/p; f.parent.mkdir(exist_ok=True); f.write_text(s)
 
 # ---- sitemap, robots, feed, manifest, service worker
-urls = [("", latest, "1.0"), ("advertise.html", latest, "0.4")] + [(f"category/{slug(c)}.html", latest, "0.8") for c in cats] + [(f"tool/{t['slug']}.html", t["date_added"], "0.6") for t in tools]
+urls = [("", latest, "1.0"), ("advertise.html", latest, "0.4"), ("disclosure.html", latest, "0.2")] + [(p, latest, "0.7") for p in best_pages] + [(f"alternatives/{s_}.html", latest, "0.6") for s_ in alt_pages] + [(f"category/{slug(c)}.html", latest, "0.8") for c in cats] + [(f"tool/{t['slug']}.html", t["date_added"], "0.6") for t in tools]
 (ROOT/"sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{d}</lastmod><priority>{p}</priority></url>\n" for u,d,p in urls) + "</urlset>\n")
 (ROOT/"robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /offline.html\nSitemap: {SITE}sitemap.xml\n")
 rfc = lambda d: datetime.datetime.fromisoformat(d).strftime("%a, %d %b %Y 00:00:00 +0000")
@@ -178,4 +233,5 @@ self.addEventListener("fetch",e=>{{const r=e.request;if(r.method!=="GET"||new UR
 if(r.mode==="navigate"||r.url.endsWith("tools.json")){{e.respondWith(fetch(r).then(res=>{{const c=res.clone();caches.open(V).then(x=>x.put(r,c));return res}}).catch(()=>caches.match(r).then(m=>m||caches.match("{BASE}offline.html"))));return}}
 e.respondWith(caches.match(r).then(m=>m||fetch(r).then(res=>{{if(res.ok){{const c=res.clone();caches.open(V).then(x=>x.put(r,c))}}return res}})))}});
 ''')
+print(f"Affiliate links active: {sum(t['aff'] for t in tools)}")
 print(f"Built {len(pages)} pages ({len(tools)} tool pages), {len(cats)} categories, {len(new_week)} new this week, v{VER}")
