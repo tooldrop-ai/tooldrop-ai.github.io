@@ -1,6 +1,6 @@
 {
   "_readme": "Paste your approved affiliate link next to a tool slug (must start with https://), then run: python3 scripts/build.py. Empty values are ignored and the official URL is used. Slugs = tool/<slug>.html.",
-  "elevenlabs": "",
+  "elevenlabs": "https://try.elevenlabs.io/j26gxs1aj8qn",
   "krisp": "",
   "gamma": "",
   "synthesia": "",
