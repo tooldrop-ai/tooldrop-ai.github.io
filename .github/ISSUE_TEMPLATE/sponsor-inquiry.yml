@@ -1,0 +1,16 @@
+name: Sponsor inquiry
+description: Ask about the Featured / Sponsored slot (issues are public — nothing confidential)
+title: "[Sponsor] "
+labels: ["sponsor"]
+body:
+  - type: input
+    id: tool-name
+    attributes: {label: Tool name}
+    validations: {required: true}
+  - type: input
+    id: tool-url
+    attributes: {label: Official URL}
+    validations: {required: true}
+  - type: textarea
+    id: details
+    attributes: {label: What are you looking for?, description: "Dates, duration, and how you'd like to be contacted (public)."}

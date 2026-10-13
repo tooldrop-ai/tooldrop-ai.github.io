@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tooldrop-ai.github.io/sitemap.xml

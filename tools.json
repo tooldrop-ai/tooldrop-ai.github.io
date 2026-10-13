@@ -1,0 +1,546 @@
+[
+  {
+    "name": "ChatGPT",
+    "url": "https://chatgpt.com/",
+    "description": "OpenAI's conversational assistant for writing, coding, analysis and more.",
+    "category": "Chat & Assistants",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Claude",
+    "url": "https://claude.ai/",
+    "description": "Anthropic's AI assistant for reasoning, writing and coding.",
+    "category": "Chat & Assistants",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Google Gemini",
+    "url": "https://gemini.google.com/",
+    "description": "Google's multimodal AI assistant integrated with Google apps.",
+    "category": "Chat & Assistants",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Microsoft Copilot",
+    "url": "https://copilot.microsoft.com/",
+    "description": "Microsoft's AI companion for chat, search and Microsoft 365.",
+    "category": "Chat & Assistants",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Grok",
+    "url": "https://grok.com/",
+    "description": "xAI's assistant with real-time knowledge from the web and X.",
+    "category": "Chat & Assistants",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Mistral Le Chat",
+    "url": "https://chat.mistral.ai/",
+    "description": "Mistral AI's fast chat assistant with web search and documents.",
+    "category": "Chat & Assistants",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Perplexity",
+    "url": "https://www.perplexity.ai/",
+    "description": "AI answer engine with cited, real-time web research.",
+    "category": "Search & Research",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Consensus",
+    "url": "https://consensus.app/",
+    "description": "AI search engine that finds answers in scientific papers.",
+    "category": "Search & Research",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Elicit",
+    "url": "https://elicit.com/",
+    "description": "AI research assistant for summarizing and extracting from papers.",
+    "category": "Search & Research",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "NotebookLM",
+    "url": "https://notebooklm.google.com/",
+    "description": "Google's AI notebook that grounds answers in your own sources.",
+    "category": "Search & Research",
+    "pricing": "free",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Cursor",
+    "url": "https://cursor.com/",
+    "description": "AI-first code editor with agentic coding features.",
+    "category": "Coding",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "GitHub Copilot",
+    "url": "https://github.com/features/copilot",
+    "description": "AI pair programmer inside your editor and GitHub.",
+    "category": "Coding",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Replit",
+    "url": "https://replit.com/",
+    "description": "Browser-based IDE with an AI agent that builds and deploys apps.",
+    "category": "Coding",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "v0",
+    "url": "https://v0.app/",
+    "description": "Vercel's AI tool for generating web UIs and apps from prompts.",
+    "category": "Coding",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Bolt.new",
+    "url": "https://bolt.new/",
+    "description": "Prompt, run, edit and deploy full-stack web apps in the browser.",
+    "category": "Coding",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Lovable",
+    "url": "https://lovable.dev/",
+    "description": "Build web apps by chatting with AI.",
+    "category": "Coding",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Midjourney",
+    "url": "https://www.midjourney.com/",
+    "description": "High-quality AI image generation from text prompts.",
+    "category": "Image",
+    "pricing": "paid",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Adobe Firefly",
+    "url": "https://firefly.adobe.com/",
+    "description": "Adobe's generative AI for images, vectors and effects.",
+    "category": "Image",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Ideogram",
+    "url": "https://ideogram.ai/",
+    "description": "AI image generator known for accurate text in images.",
+    "category": "Image",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Leonardo.Ai",
+    "url": "https://leonardo.ai/",
+    "description": "AI image and video generation platform for creators.",
+    "category": "Image",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Canva",
+    "url": "https://www.canva.com/",
+    "description": "Design platform with built-in Magic AI tools.",
+    "category": "Design",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Runway",
+    "url": "https://runwayml.com/",
+    "description": "AI video generation and editing tools for creatives.",
+    "category": "Video",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Synthesia",
+    "url": "https://www.synthesia.io/",
+    "description": "Create videos with AI avatars and voiceovers.",
+    "category": "Video",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Descript",
+    "url": "https://www.descript.com/",
+    "description": "Edit audio and video by editing the transcript.",
+    "category": "Video",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "ElevenLabs",
+    "url": "https://elevenlabs.io/",
+    "description": "Realistic AI text-to-speech and voice cloning.",
+    "category": "Audio",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Suno",
+    "url": "https://suno.com/",
+    "description": "Generate full songs with vocals from a text prompt.",
+    "category": "Audio",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Otter.ai",
+    "url": "https://otter.ai/",
+    "description": "AI meeting notes, transcription and summaries.",
+    "category": "Productivity",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Notion AI",
+    "url": "https://www.notion.com/product/ai",
+    "description": "AI writing, search and Q&A inside your Notion workspace.",
+    "category": "Productivity",
+    "pricing": "paid",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Grammarly",
+    "url": "https://www.grammarly.com/",
+    "description": "AI writing assistant for grammar, tone and clarity.",
+    "category": "Writing",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "DeepL",
+    "url": "https://www.deepl.com/",
+    "description": "High-quality AI translation and writing assistant.",
+    "category": "Writing",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Hugging Face",
+    "url": "https://huggingface.co/",
+    "description": "Open platform hosting models, datasets and AI demos.",
+    "category": "Developer Platforms",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "Gamma",
+    "url": "https://gamma.app/",
+    "description": "Create presentations, docs and websites with AI.",
+    "category": "Productivity",
+    "pricing": "freemium",
+    "date_added": "2026-10-01"
+  },
+  {
+    "name": "DeepSeek",
+    "url": "https://chat.deepseek.com/",
+    "description": "Free chat assistant powered by DeepSeek's open-weight models.",
+    "category": "Chat & Assistants",
+    "pricing": "free",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Meta AI",
+    "url": "https://www.meta.ai/",
+    "description": "Meta's assistant for chat, images and answers across its apps.",
+    "category": "Chat & Assistants",
+    "pricing": "free",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Poe",
+    "url": "https://poe.com/",
+    "description": "Chat with many AI models and bots in one app.",
+    "category": "Chat & Assistants",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Pi",
+    "url": "https://pi.ai/",
+    "description": "A personal, conversational AI from Inflection.",
+    "category": "Chat & Assistants",
+    "pricing": "free",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Character.AI",
+    "url": "https://character.ai/",
+    "description": "Chat with customizable AI characters.",
+    "category": "Chat & Assistants",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "You.com",
+    "url": "https://you.com/",
+    "description": "AI search and research assistant with citations.",
+    "category": "Search & Research",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Semantic Scholar",
+    "url": "https://www.semanticscholar.org/",
+    "description": "Free AI-powered search for scientific literature.",
+    "category": "Search & Research",
+    "pricing": "free",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Windsurf",
+    "url": "https://windsurf.com/",
+    "description": "AI-native code editor with an agentic assistant.",
+    "category": "Coding",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Tabnine",
+    "url": "https://www.tabnine.com/",
+    "description": "AI code completion focused on privacy and teams.",
+    "category": "Coding",
+    "pricing": "paid",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Claude Code",
+    "url": "https://www.anthropic.com/claude-code",
+    "description": "Anthropic's agentic coding tool for the terminal.",
+    "category": "Coding",
+    "pricing": "paid",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Stable Diffusion (Stability AI)",
+    "url": "https://stability.ai/",
+    "description": "Open image generation models from Stability AI.",
+    "category": "Image",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Krea",
+    "url": "https://www.krea.ai/",
+    "description": "Real-time AI image and video generation and upscaling.",
+    "category": "Image",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Playground",
+    "url": "https://playground.com/",
+    "description": "AI design tool for graphics, logos and social posts.",
+    "category": "Design",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Figma AI",
+    "url": "https://www.figma.com/ai/",
+    "description": "AI features built into Figma for design workflows.",
+    "category": "Design",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Looka",
+    "url": "https://looka.com/",
+    "description": "AI logo maker and brand kit generator.",
+    "category": "Design",
+    "pricing": "paid",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Remove.bg",
+    "url": "https://www.remove.bg/",
+    "description": "Remove image backgrounds automatically with AI.",
+    "category": "Image",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Pika",
+    "url": "https://pika.art/",
+    "description": "Turn text and images into short AI videos.",
+    "category": "Video",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Luma Dream Machine",
+    "url": "https://lumalabs.ai/dream-machine",
+    "description": "Generate realistic videos and images from prompts.",
+    "category": "Video",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "HeyGen",
+    "url": "https://www.heygen.com/",
+    "description": "AI avatar videos and video translation.",
+    "category": "Video",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "CapCut",
+    "url": "https://www.capcut.com/",
+    "description": "Video editor with AI captions, effects and tools.",
+    "category": "Video",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "OpusClip",
+    "url": "https://www.opus.pro/",
+    "description": "Turn long videos into short viral clips with AI.",
+    "category": "Video",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Udio",
+    "url": "https://www.udio.com/",
+    "description": "Create music with vocals from text prompts.",
+    "category": "Audio",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Adobe Podcast",
+    "url": "https://podcast.adobe.com/",
+    "description": "AI speech enhancement and podcast recording tools.",
+    "category": "Audio",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Krisp",
+    "url": "https://krisp.ai/",
+    "description": "AI noise cancellation and meeting notes.",
+    "category": "Audio",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Fireflies.ai",
+    "url": "https://fireflies.ai/",
+    "description": "AI notetaker that records and summarizes meetings.",
+    "category": "Productivity",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Zapier",
+    "url": "https://zapier.com/",
+    "description": "Automate workflows across apps with AI agents.",
+    "category": "Productivity",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Motion",
+    "url": "https://www.usemotion.com/",
+    "description": "AI calendar and project planner.",
+    "category": "Productivity",
+    "pricing": "paid",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Jasper",
+    "url": "https://www.jasper.ai/",
+    "description": "AI content platform for marketing teams.",
+    "category": "Writing",
+    "pricing": "paid",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Copy.ai",
+    "url": "https://www.copy.ai/",
+    "description": "AI for go-to-market copy and workflows.",
+    "category": "Writing",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "QuillBot",
+    "url": "https://quillbot.com/",
+    "description": "AI paraphrasing, grammar and summarizing tool.",
+    "category": "Writing",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Wordtune",
+    "url": "https://www.wordtune.com/",
+    "description": "AI rewriting and writing assistant.",
+    "category": "Writing",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "OpenAI Platform",
+    "url": "https://platform.openai.com/",
+    "description": "APIs for OpenAI's models.",
+    "category": "Developer Platforms",
+    "pricing": "paid",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Replicate",
+    "url": "https://replicate.com/",
+    "description": "Run open-source AI models via a cloud API.",
+    "category": "Developer Platforms",
+    "pricing": "paid",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Ollama",
+    "url": "https://ollama.com/",
+    "description": "Run large language models locally on your computer.",
+    "category": "Developer Platforms",
+    "pricing": "free",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "LM Studio",
+    "url": "https://lmstudio.ai/",
+    "description": "Desktop app to discover and run local LLMs.",
+    "category": "Developer Platforms",
+    "pricing": "free",
+    "date_added": "2026-10-13"
+  },
+  {
+    "name": "Google AI Studio",
+    "url": "https://aistudio.google.com/",
+    "description": "Prototype with Gemini models and get an API key.",
+    "category": "Developer Platforms",
+    "pricing": "freemium",
+    "date_added": "2026-10-13"
+  }
+]
