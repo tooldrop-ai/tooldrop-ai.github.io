@@ -20,5 +20,6 @@ cats = sorted({t["category"] for t in tools})
 if a.category not in cats: print(f"Note: new category '{a.category}' (existing: {', '.join(cats)})")
 tools.append(dict(name=a.name, url=a.url, description=a.description, category=a.category, pricing=a.pricing, date_added=a.date))
 (ROOT/"tools.json").write_text(json.dumps(tools, indent=2, ensure_ascii=False) + "\n")
+subprocess.run([sys.executable, str(ROOT/"scripts/fetch_logos.py")])  # best effort; monogram fallback
 subprocess.run([sys.executable, str(ROOT/"scripts/build.py")], check=True)
 print(f"Added {a.name}. Now: git add -A && git commit -m 'Add {a.name}' && git push")

@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /offline.html
 Sitemap: https://tooldrop-ai.github.io/sitemap.xml
