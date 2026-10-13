@@ -72,3 +72,19 @@ const tt=$("#totop");if(tt){let tick=false;addEventListener("scroll",()=>{if(!ti
 /* PWA */
 if("serviceWorker"in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));
 })();
+/* hero intent rotator */
+(()=>{const p=document.querySelector(".intent[data-intents]");if(!p)return;const list=JSON.parse(p.dataset.intents),a=document.getElementById("intent"),t=document.getElementById("intent-t");
+if(matchMedia("(prefers-reduced-motion: reduce)").matches||list.length<2)return;let i=0,paused=false;a.addEventListener("mouseenter",()=>paused=true);a.addEventListener("mouseleave",()=>paused=false);a.addEventListener("focus",()=>paused=true);a.addEventListener("blur",()=>paused=false);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+(async function loop(){await sleep(2600);while(true){if(paused||document.hidden){await sleep(400);continue}
+ const cur=t.textContent;for(let k=cur.length;k>=0;k--){t.textContent=cur.slice(0,k);await sleep(22)}
+ i=(i+1)%list.length;const[n,h]=list[i];a.href=h;for(let k=1;k<=n.length;k++){t.textContent=n.slice(0,k);await sleep(38)}await sleep(2400)}})()})();
+/* badge generator */
+(()=>{const sel=document.getElementById("b-tool");if(!sel)return;const code=document.getElementById("b-code"),img=document.getElementById("b-img"),lnk=document.getElementById("b-link"),ok=document.getElementById("b-ok");
+const q=new URLSearchParams(location.search).get("tool");if(q&&[...sel.options].some(o=>o.value===q))sel.value=q;
+const S="https://tooldrop-ai.github.io/";let md="";
+function upd(){const st=document.querySelector('input[name="b-style"]:checked').value,u=`${S}tool/${sel.value}.html`,src=`${S}assets/badges/featured-${st}.svg`;img.src=`/assets/badges/featured-${st}.svg`;lnk.href=u;
+ code.value=`<a href="${u}" target="_blank" rel="noopener"><img src="${src}" alt="Featured on ToolDrop" width="220" height="56"></a>`;md=`[![Featured on ToolDrop](${src})](${u})`}
+const copy=(txt,msg)=>{(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>ok.textContent=msg).catch(()=>{code.select();ok.textContent="Press Ctrl/⌘+C to copy"})};
+sel.addEventListener("change",upd);document.querySelectorAll('input[name="b-style"]').forEach(r=>r.addEventListener("change",upd));
+document.getElementById("b-copy").addEventListener("click",()=>copy(code.value,"Copied HTML ✓"));document.getElementById("b-md").addEventListener("click",()=>copy(md,"Copied Markdown ✓"));upd()})();
